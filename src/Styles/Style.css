@@ -1,0 +1,175 @@
+*{
+    margin: 0;
+}
+*,
+*::before,
+*::after
+{
+    box-sizing: border-box;
+}
+.page
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main
+{
+    flex: 1;
+}
+/*landingheader*/
+.header
+{
+    padding: 12px 128px;
+    width: 100%;
+    
+    background: linear-gradient(90deg, #6C5CE7, #A29BFE);
+}
+.container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    
+    padding: 0px 48px;
+    
+
+    
+
+}
+
+
+/* логотип */
+.header_logo
+{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    border-style: solid;
+    border-color: white;
+    background: transparent;
+}
+
+
+/* кнопки */
+.header_actions
+{
+    justify-content: flex-start;
+    display: flex;
+    gap: 24px;
+}
+
+.btn
+{
+    width: 100px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-outline
+{
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-primary
+{
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+}
+/*footer*/
+.footer
+{
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: flex-start;
+padding: 48px 0px;
+gap: 100px;
+width: 100%;
+height: 312px;
+
+background: #6C5CE7;
+
+}
+
+.content_footer
+{
+    
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 100px;
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+}
+.content_footer_info
+{  
+
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 64px;
+
+
+
+
+
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+}
+
+.footer-link
+{
+    /* General information */
+
+
+
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+}
+
+.general_information, .accessibility_information, .policies_information, .content_question,.content_manage_account,.content_recomendation
+{
+width: 148px;
+flex-direction: column;
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}
+
+
+
