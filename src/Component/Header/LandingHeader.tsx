@@ -34,8 +34,8 @@ export default function LandingHeader()
 
                  </div>
             <div className="header_actions">
-                <button className="btn btn-outline">Sign in</button>
-                <button className="btn btn-primary">Sign up</button>
+                <button className="btn btn-outline">Sign In</button>
+                <button className="btn btn-primary">Sign Up</button>
             </div>   
 
             </div>
