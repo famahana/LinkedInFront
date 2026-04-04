@@ -289,6 +289,7 @@ color: #000000;
 }
 .login_google
 {
+background-color: transparent;
 box-sizing: border-box;
 display: flex;
 flex-direction: row;
@@ -431,6 +432,7 @@ justify-content: flex-start;
 }
 .buttons_group button
 {
+background-color: transparent;
 padding: 5px 10px;
 border: 1px solid #000000;
 border-radius: 52px;
@@ -452,7 +454,7 @@ white-space: nowrap;
 .post_vacancy
 {
 display: flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 10px 16px;
@@ -466,4 +468,101 @@ font-weight: 400;
 font-size: 48px;
 line-height: 60px;
 color: #000000;
+}
+.post_btn
+{
+background-color: transparent;
+box-sizing: border-box;
+padding: 5px 10px;
+gap: 10px;
+border: 1px solid #000000;
+border-radius: 52px;
+max-width: 300px;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+color: #000000;
+}
+.section_light
+{
+background: #ffffff;
+width: 100%;
+}
+.section_hero_inner
+{
+display: flex;
+justify-content: space-between;
+margin: 0 auto;
+max-width: 2200px;
+padding: 80px 24px;
+}
+.text_discover
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 48px;
+line-height: 60px;
+color: #000000;
+}
+.text_connect
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 60px;
+color: #000000;
+}
+.section_hero_left
+{
+max-width: 550px;
+}
+.section_hero_right
+{
+max-width: 500px;
+
+}
+
+.container_last
+{
+width: 100%;
+background: linear-gradient(360deg, rgba(108, 92, 231, 0.75) 0%, rgba(248, 249, 250, 0.75) 100%);
+}
+.container_last_inner
+{
+display: flex;
+justify-content: space-between;
+margin: 0 auto;
+max-width: 2200px;
+padding: 80px 24px;
+}
+.text_last
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 64px;
+line-height: 60px;
+color: #000000;
+}
+.container_g
+{
+max-width: 1100px;
+}
+.button_end
+{
+box-sizing: border-box;
+padding: 10px 10px;
+gap: 10px;
+border: 1px solid #000000;
+border-radius: 21px;
+background-color: transparent;
+}
+.container_l
+{
+    max-width: 100px;
+    padding: 30px 0px;
 }

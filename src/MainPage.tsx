@@ -62,6 +62,36 @@ function MainPage()
                 <h1 className="text_3">
                     Post your vacancy so millions of people can see it
                 </h1>
+                <button className="post_btn">Post a vacancy</button>
+            </div>
+            <div className="section_light">
+                <div className="section_hero_inner">
+                    <div className="section_hero_left">
+                        <h1 className="text_discover">Discover the best software tools</h1>
+                        <h1 className="text_connect">Connect with buyers who have first-hand experience to find the best products for you.</h1>
+                    </div>
+                    <div className="section_hero_right">
+                        <div className="group_container">
+                                    <div className="buttons_group">
+                                    <button>E-commerce platforms</button>
+                                    <button>Recruiting Software</button>
+                                    <button>Software fro CRM systems</button>
+                                    <button>Social Networking Software</button>
+                                    <button>HR systems</button>
+                                    <button>Project Management Software</button>
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+
+            </div>
+            <div className="container_last">
+                <div className="container_last_inner">
+                    <div className="container_g">
+                        <h1 className="text_last">Connect with your colleagues, classmates and friends on LinkedIn.</h1>
+                        <div className="container_l"><button className="button_end">Login</button></div>
+                    </div>
+                </div>
             </div>
         </div>
     )
