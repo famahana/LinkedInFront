@@ -566,3 +566,230 @@ background-color: transparent;
     max-width: 100px;
     padding: 30px 0px;
 }
+
+
+
+
+
+
+/*registration*/
+.hero_reg
+{
+background: #ffffff;
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.header_logo_reg
+{
+width: 70px;
+height: 70px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 16px;
+border-style: solid;
+border-color: white;
+background: #6C5CE7;
+
+}
+.container_logo
+{
+padding: 48px 48px;
+}
+.hero_reg_inner
+{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 48px;
+background: #FFFFFF;
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+border-radius: 20px;
+max-width: 500px;
+}
+.reg_container
+{
+max-width: 400px;
+}
+.reg_text
+{
+width: 400px;
+}
+.inputs_container
+{
+display: flex;
+flex-direction: column;
+gap: 14px;
+max-width: 400px;
+padding: 20px 0px;
+}
+.text_welcome
+{
+font-family: 'Plus Jakarta Sans';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+color: #2D3436;
+margin: -8px 0px;
+}
+.text_professional
+{
+font-family: 'Plus Jakarta Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 28px;
+line-height: 150%;
+color: #2D3436;
+}
+.inputs
+{
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 24px;
+gap: 10px;
+border: 1.5px solid #6C5CE7;
+border-radius: 8px;
+max-width: 400px;
+max-height: 50px;
+}
+.eye
+{
+display: flex;
+align-items: end;
+flex-direction: row;
+justify-content: end;
+}
+.input {
+border: none;
+outline: none;
+width: 100%;
+font-size: 16px;
+background: transparent;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+color: #6C5CE7;
+}
+.input_showpassword
+{
+background: none;
+border: none;
+cursor: pointer;
+font-size: 18px;
+color: #6C5CE7;
+}
+.sign_up_button_container
+{
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 10px;
+gap: 10px;
+background: #6C5CE7;
+border-radius: 8px;
+max-width: 450px;
+max-height: 50px;
+}
+.sign_up_button
+{
+font-family: 'Plus Jakarta Sans';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 150%;
+color: #FFFFFF;
+background-color: transparent;
+border: 0;
+cursor: pointer;
+}
+.button_container
+{
+padding: 20px 0px;
+}
+.signup_text
+{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 150%;
+color: #2D3436;
+}
+.privacy_text
+{
+color: #6C5CE7  ;
+}
+.or_container
+{
+max-width: 400px;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+}
+.continue_container
+{
+display: flex;
+flex-direction: column;
+width: 100%;
+max-width: 400px;
+padding: 20px 0px;
+gap: 14px;
+}
+.continue_google_container
+{
+box-sizing: border-box;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 11px 64.5px 11px 64.48px;
+gap: 8px;
+border: 1.5px solid #6C5CE7;
+border-radius: 8px;
+max-width: 400px;
+max-height: 50px;
+}
+.continue_google
+{
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 10px;
+}
+.google_button
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+color: #2D3436;
+background-color: transparent;
+border: 0;
+cursor: pointer;
+}
+.signin_button
+{
+cursor: pointer;
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 150%;
+color: #2D3436;
+background-color: transparent;
+border: 0;
+}
