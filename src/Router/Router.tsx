@@ -4,6 +4,8 @@ import MainLayout from "../Layouts/MainLayout";
 import RegistrationForm from "../Component/RegistrationForm";
 import RegistrationLayout from "../Layouts/RegistrationLayout"
 import MainPage from "../Component/MainPage"
+import LoginForm from "../Component/LoginForm"
+import LoginLayout from "../Layouts/LoginLayout"
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +25,15 @@ export const router = createBrowserRouter([
             {
                 path:"/registration",
                 element:<RegistrationForm/>
+            }
+        ]
+    },
+    {
+        element:<LoginLayout/>,
+        children:[
+            {
+                path:"/login",
+                element:<LoginForm/>
             }
         ]
     }

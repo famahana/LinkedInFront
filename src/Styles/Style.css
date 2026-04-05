@@ -793,3 +793,11 @@ color: #2D3436;
 background-color: transparent;
 border: 0;
 }
+
+@media (max-height: 1080px) {
+    .container_logo
+    {
+        padding: 0px 0px;
+    }
+    
+}
