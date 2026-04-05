@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-function RegistrationForm()
+function LoginForm()
 {
     return(
         <div className="registration_form">
@@ -105,4 +105,4 @@ function RegistrationForm()
 
 }
 
-export default RegistrationForm
+export default LoginForm

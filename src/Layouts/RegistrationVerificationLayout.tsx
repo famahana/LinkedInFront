@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-export default function LoginLayout()
+export default function RegistrationVerificationLayout()
 {
     return(
         <div className="page">
