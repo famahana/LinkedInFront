@@ -12,6 +12,7 @@ import LoginVerification from "../Component/LoginVerification";
 import LoginVerificationLayout from "../Layouts/LoginVerificationLayout";
 import UserPageLayout from "../Layouts/UserPageLayout";
 import UserPage from "../Component/UserPage";
+import { PrivateRoute } from "../Component/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -67,7 +68,12 @@ export const router = createBrowserRouter([
         children:[
             {
                 path:"/userpage",
-                element:<UserPage/>
+                element:
+                (
+                    <PrivateRoute>
+                        <UserPage/>
+                    </PrivateRoute>
+                )
             }
         ]
     }
