@@ -56,6 +56,8 @@ border-radius: 16px;
 border-style: solid;
 border-color: white;
 background: transparent;
+cursor: pointer;
+
 }
 
 
@@ -324,6 +326,7 @@ font-weight: 400;
 font-size: 16px;
 line-height: 24px;
 color: #FFFFFF;
+cursor: pointer;
 }
 .hero_right
 {
@@ -593,6 +596,8 @@ border-radius: 16px;
 border-style: solid;
 border-color: white;
 background: #6C5CE7;
+cursor: pointer;
+
 
 }
 .container_logo

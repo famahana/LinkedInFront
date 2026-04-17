@@ -1,13 +1,27 @@
 import "../../Styles/Style.css"
-
+import { useNavigate } from "react-router-dom"
 
 export default function LandingHeader()
 {
+    const navigate = useNavigate();
+    
+        const handleSigninbutton = async () =>
+        {
+            navigate("/login"); 
+        }
+        const handleSignupbutton = async () =>
+        {
+            navigate("/registration"); 
+        }
+        const handleLinkedInButton = async () =>
+        {
+            navigate("/"); 
+        }
     return(
         <>
         <header className="header">
             <div className="container">  
-                <div className="header_logo">
+                <div onClick={handleLinkedInButton} className="header_logo">
                     <svg width="49" height="50" viewBox="0 0 49 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M32.1621 16.4517C35.3609 16.4517 38.4286 17.7516 40.6904 20.0656C42.9523 22.3795 44.2229 25.5179 44.2229 28.7904V43.1855H36.1824V28.7904C36.1824 27.6996 35.7588 26.6534 35.0049 25.8821C34.2509 25.1108 33.2284 24.6775 32.1621 24.6775C31.0959 24.6775 30.0733 25.1108 29.3194 25.8821C28.5654 26.6534 28.1419 27.6996 28.1419 28.7904V43.1855H20.1013V28.7904C20.1013 25.5179 21.372 22.3795 23.6338 20.0656C25.8957 17.7516 28.9634 16.4517 32.1621 16.4517V16.4517Z" fill="url(#paint0_radial_898_9647)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M12.0608 18.5083H4.02026V43.1857H12.0608V18.5083Z" fill="url(#paint1_radial_898_9647)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -34,8 +48,8 @@ export default function LandingHeader()
 
                  </div>
             <div className="header_actions">
-                <button className="btn btn-outline">Sign In</button>
-                <button className="btn btn-primary">Sign Up</button>
+                <button onClick={handleSigninbutton} className="btn btn-outline">Sign In</button>
+                <button onClick={handleSignupbutton} className="btn btn-primary">Sign Up</button>
             </div>   
 
             </div>

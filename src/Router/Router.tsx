@@ -10,6 +10,9 @@ import RegistrationVerificationLayout from "../Layouts/RegistrationVerificationL
 import RegistrationVerificationPage from "../Component/RegistrationVerification"
 import LoginVerification from "../Component/LoginVerification";
 import LoginVerificationLayout from "../Layouts/LoginVerificationLayout";
+import UserPageLayout from "../Layouts/UserPageLayout";
+import UserPage from "../Component/UserPage";
+import { PrivateRoute } from "../Component/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -59,6 +62,20 @@ export const router = createBrowserRouter([
             }
         ]
 
+    },
+    {
+        element:<UserPageLayout/>,
+        children:[
+            {
+                path:"/userpage",
+                element:
+                (
+                    <PrivateRoute>
+                        <UserPage/>
+                    </PrivateRoute>
+                )
+            }
+        ]
     }
     
 ])

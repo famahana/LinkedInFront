@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function MainPage()
 {
+    const navigate = useNavigate();
+    const handleLoginButton = async () =>
+    {
+        navigate("/login"); 
+    }
     return(
         <div className="main_page">
             <div className="hero">
@@ -13,7 +20,7 @@ function MainPage()
                         <button className="login_google">
                             Login with Google
                         </button>
-                        <button className="login_email">
+                        <button onClick={handleLoginButton} className="login_email">
                             Login by email addressd
                         </button>
                     </div>
