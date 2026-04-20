@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 const API_URL = "https://localhost:7271/api";
 
 export async function request<T>(
@@ -5,7 +6,7 @@ export async function request<T>(
     options: RequestInit = {}
 ): Promise<T>
 {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
 
     const response = await fetch(`${API_URL}${url}`, {
         ...options,

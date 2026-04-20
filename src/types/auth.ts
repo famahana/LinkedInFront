@@ -1,3 +1,4 @@
+import type { UserDto } from "./user";
 export interface LoginDto
 {
     email:string;
@@ -11,4 +12,5 @@ export interface RegisterDto
 export interface AuthResponse
 {
     accessToken:string;
+    user:UserDto;
 }

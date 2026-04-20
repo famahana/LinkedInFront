@@ -2,11 +2,13 @@ import { useState } from "react"
 import { authService } from "../services/authService"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 function LoginForm()
 {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const navigate = useNavigate();
+    const {login} = useAuth();
     const handleLinkedInButton = async () =>
     {
         navigate("/"); 
@@ -19,9 +21,13 @@ function LoginForm()
     {
         try
         {
-            const data = await authService.login({ email, password });
+            // const data = await authService.login({ email, password });
 
-            localStorage.setItem("token", data.accessToken);
+            // localStorage.setItem("token", data.accessToken);
+            const result = await authService.login({email,password});
+            console.log(result)
+            login(result.accessToken,result.user)
+
 
             console.log("Sucefull login");
             navigate("/userpage");

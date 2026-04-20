@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { authService } from "../services/authService"
 import { useNavigate } from "react-router-dom";
 function RegistrationForm()
 {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [emailError, setEmailError] = useState<string>("");
+    const [passError, setPassError] = useState<string>("");
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const navigate = useNavigate();
     const handleLinkedInButton = async () =>
     {
@@ -15,18 +19,52 @@ function RegistrationForm()
     {
         navigate("/login"); 
     }
+    useEffect(() => {
+        if (email.length > 0) {
+            const isValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+            if (!isValid) {
+                setEmailError("Please enter a valid email (e.g. .com, .net)");
+            } else {
+                setEmailError("");
+            }
+        } else {
+            setEmailError("");
+        }
+
+        if (confirmPassword.length > 0 || password.length > 0) {
+            if (password !== confirmPassword) {
+                setPassError("Passwords do not match");
+            } else {
+                setPassError("");
+            }
+        }
+    }, [email, password, confirmPassword]);
+
     const handleRegister = async () =>
     {
-        try
-        {
-            await authService.register({ email, password });
-
-            console.log("Sucefull registration");
-            navigate("/login"); 
+        const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+       if (!isEmailValid) {
+            alert("Invalid email address!");
+            return;
         }
-        catch (error)
-        {
-            console.error("Error registration", error);
+
+        if (password !== confirmPassword) {
+            alert("Passwords must match!");
+            return;
+        }
+
+        if (!password || password.length < 4) {
+            alert("Password is too short!");
+            return;
+        }
+
+        try {
+            await authService.register({ email, password });
+            console.log("Success!");
+            navigate("/login"); 
+        } catch (error) {
+            console.error("Registration error:", error);
+            alert("Registration failed. Check your data.");
         }
     };
     return(
@@ -65,22 +103,23 @@ function RegistrationForm()
                         <h1 className="text_professional">professional community</h1>
                         </div>
                         <div className="inputs_container">
-                            <div className="inputs">
+                            <div className="inputs" style={{ marginBottom: '5px' }}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 5.25C2.25 4.83579 2.58579 4.5 3 4.5H21C21.4142 4.5 21.75 4.83579 21.75 5.25V18C21.75 18.3978 21.592 18.7794 21.3107 19.0607C21.0294 19.342 20.6478 19.5 20.25 19.5H3.75C3.35218 19.5 2.97065 19.342 2.68934 19.0607C2.40804 18.7794 2.25 18.3978 2.25 18V5.25ZM3.75 6V18H20.25V6H3.75Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.44714 4.74321C2.72703 4.43787 3.20146 4.41724 3.5068 4.69714L12 12.4826L20.4932 4.69714C20.7985 4.41724 21.273 4.43787 21.5529 4.74321C21.8328 5.04855 21.8121 5.52298 21.5068 5.80287L12.5068 14.0529C12.2201 14.3157 11.78 14.3157 11.4932 14.0529L2.49321 5.80287C2.18787 5.52298 2.16724 5.04855 2.44714 4.74321Z" fill="#6C5CE7"/>
                                 </svg>
-                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email or phone number" className="input" />
+                                <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email or phone number" className={`input ${emailError ? 'input_error' : ''}`} />
                             </div>
-                            <div className="inputs">
+                            {emailError && <span style={{ color: '#ff7675', fontSize: '12px', marginLeft: '45px' }}>{emailError}</span>}
+                            <div className="inputs" style={{ marginTop: '15px' }}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12C11.3787 12 10.875 12.5037 10.875 13.125C10.875 13.7463 11.3787 14.25 12 14.25C12.6213 14.25 13.125 13.7463 13.125 13.125C13.125 12.5037 12.6213 12 12 12ZM9.375 13.125C9.375 11.6753 10.5503 10.5 12 10.5C13.4497 10.5 14.625 11.6753 14.625 13.125C14.625 14.5747 13.4497 15.75 12 15.75C10.5503 15.75 9.375 14.5747 9.375 13.125Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 14.25C12.4142 14.25 12.75 14.5858 12.75 15V17.25C12.75 17.6642 12.4142 18 12 18C11.5858 18 11.25 17.6642 11.25 17.25V15C11.25 14.5858 11.5858 14.25 12 14.25Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3 9C3 8.17157 3.67157 7.5 4.5 7.5H19.5C20.3284 7.5 21 8.17157 21 9V19.5C21 20.3284 20.3284 21 19.5 21H4.5C3.67157 21 3 20.3284 3 19.5V9ZM19.5 9H4.5V19.5H19.5V9Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25C11.3038 2.25 10.6361 2.52656 10.1438 3.01884C9.65156 3.51113 9.375 4.17881 9.375 4.875V8.25C9.375 8.66421 9.03921 9 8.625 9C8.21079 9 7.875 8.66421 7.875 8.25V4.875C7.875 3.78098 8.3096 2.73177 9.08318 1.95818C9.85677 1.1846 10.906 0.75 12 0.75C13.094 0.75 14.1432 1.1846 14.9168 1.95818C15.6904 2.73177 16.125 3.78098 16.125 4.875V8.25C16.125 8.66421 15.7892 9 15.375 9C14.9608 9 14.625 8.66421 14.625 8.25V4.875C14.625 4.17881 14.3484 3.51113 13.8562 3.01884C13.3639 2.52656 12.6962 2.25 12 2.25Z" fill="#6C5CE7"/>
                                 </svg>
-                                <input  value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" className="input" />
-                                <button className="input_showpassword">
+                                <input  value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword? "text" :"password"} placeholder="Password" className="input" />
+                                <button type="button" onClick={()=> setShowPassword(!showPassword)} className="input_showpassword">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -88,24 +127,25 @@ function RegistrationForm()
                                 </button>
                                 
                             </div>
-                            <div className="inputs">
+                            <div className="inputs" style={{ marginTop: '15px', marginBottom: '5px' }}>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12C11.3787 12 10.875 12.5037 10.875 13.125C10.875 13.7463 11.3787 14.25 12 14.25C12.6213 14.25 13.125 13.7463 13.125 13.125C13.125 12.5037 12.6213 12 12 12ZM9.375 13.125C9.375 11.6753 10.5503 10.5 12 10.5C13.4497 10.5 14.625 11.6753 14.625 13.125C14.625 14.5747 13.4497 15.75 12 15.75C10.5503 15.75 9.375 14.5747 9.375 13.125Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 14.25C12.4142 14.25 12.75 14.5858 12.75 15V17.25C12.75 17.6642 12.4142 18 12 18C11.5858 18 11.25 17.6642 11.25 17.25V15C11.25 14.5858 11.5858 14.25 12 14.25Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M3 9C3 8.17157 3.67157 7.5 4.5 7.5H19.5C20.3284 7.5 21 8.17157 21 9V19.5C21 20.3284 20.3284 21 19.5 21H4.5C3.67157 21 3 20.3284 3 19.5V9ZM19.5 9H4.5V19.5H19.5V9Z" fill="#6C5CE7"/>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.25C11.3038 2.25 10.6361 2.52656 10.1438 3.01884C9.65156 3.51113 9.375 4.17881 9.375 4.875V8.25C9.375 8.66421 9.03921 9 8.625 9C8.21079 9 7.875 8.66421 7.875 8.25V4.875C7.875 3.78098 8.3096 2.73177 9.08318 1.95818C9.85677 1.1846 10.906 0.75 12 0.75C13.094 0.75 14.1432 1.1846 14.9168 1.95818C15.6904 2.73177 16.125 3.78098 16.125 4.875V8.25C16.125 8.66421 15.7892 9 15.375 9C14.9608 9 14.625 8.66421 14.625 8.25V4.875C14.625 4.17881 14.3484 3.51113 13.8562 3.01884C13.3639 2.52656 12.6962 2.25 12 2.25Z" fill="#6C5CE7"/>
                                 </svg>
-                                <input type="password" placeholder="Confirm password" className="input" />
-                                <button className="input_showpassword">
+                                <input value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} type={showPassword?"text":"password"} placeholder="Confirm password" className={`input ${passError ? 'input_error' : ''}`}/>
+                                <button type="button" onClick={()=> setShowPassword(!showPassword)} className="input_showpassword">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#6C5CE7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                 </button>
                             </div>
+                            {passError && <span style={{ color: '#ff7675', fontSize: '12px', marginLeft: '45px' }}>{passError}</span>}
                             <div className="button_container">
                             <div className="sign_up_button_container">
-                                <button onClick={handleRegister} className="sign_up_button">Sign Up</button>
+                                <button onClick={handleRegister} className="sign_up_button" disabled={!!emailError || !!passError || !email} style={{ opacity: (emailError || passError || !email) ? 0.5 : 1 }}>Sign Up</button>
                             </div>
                                 <h1 className="signup_text">By Signing Up, you agree to our <Link to="/" className="privacy_text">Terms of Service</Link> and <Link to="/" className="privacy_text">Privacy Policy</Link> </h1>
                             </div>

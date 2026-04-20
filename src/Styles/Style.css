@@ -958,3 +958,143 @@ align-items: flex-end;
 padding: 10px;
 gap: 10px;
 }
+.container_userpage
+{
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 48px;
+gap: 92px;
+}
+.your_profile_left_container
+{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 48px 48px 12px;
+gap: 10px;
+background: #FFFFFF;
+box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
+max-width: 400px;
+}
+.your_profile_container
+{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 19px;
+}
+.your_profile
+{
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 0px 36px;
+gap: 16px;
+border-bottom: 1.5px solid #6C5CE7;
+width: 320px;
+}
+.saved_elements_container
+{
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+}
+.saved_elements
+{
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 8px;
+}
+.saved_elements_text
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+display: flex;
+align-items: center;
+text-align: right;
+color: #6C5CE7;
+cursor: pointer;
+}
+.contacts_text
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+display: flex;
+align-items: center;
+color: #6C5CE7;
+cursor: pointer;
+}
+.expand_text
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+display: flex;
+align-items: center;
+text-align: center;
+color: #2D3436;
+}
+.your_immage
+{
+width: 128px;
+height: 128px;
+}
+.your_info
+{
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+}
+.your_info_text_1
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 150%;
+display: flex;
+align-items: center;
+text-align: center;
+color: #6C5CE7;
+}
+.your_info_text_2
+{
+font-family: 'Rubik';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+display: flex;
+align-items: center;
+text-align: center;
+color: #2D3436;
+}
+.your_img
+{
+width: 128px;
+height: 128px;
+border-radius: 64px;
+}
+.input_error {
+    border: 1px solid #ff7675 !important;
+}
