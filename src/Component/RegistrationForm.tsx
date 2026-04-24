@@ -173,9 +173,7 @@ function RegistrationForm()
                         </div>
                         <div className="sign_in_container_continue">
                             <div className="continue_google_container">
-                                <div className="sign_in_container_reg">
-                                    <button onClick={handleLoginButton} className="signin_button">Sign In</button>
-                                </div>
+                                <button onClick={handleLoginButton} className="signin_button">Sign In</button>     
                        </div>
                         </div>
                     </div>

@@ -16,11 +16,21 @@ export async function request<T>(
             ...options.headers
         }
     });
+    let data = null;
+
+    try
+    {
+        data = await response.json();
+    }
+    catch
+    {
+        data = null;
+    }
 
     if (!response.ok)
     {
-        throw new Error("Request failed");
+        throw new Error(data?.message || "Request failed");
     }
 
-    return response.json();
+    return data;
 }

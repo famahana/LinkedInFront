@@ -1,16 +1,18 @@
+import { useAuth } from "./AuthContext";
 function UserPage()
 {
+    const {profile} = useAuth()
     return(
             <div className="container_userpage">
                 <div className="your_profile_left_container">
                     <div className="your_profile_container">
                         <div className="your_profile">
                             <div className="your_immage">
-                                <img className="your_img" src="https://images.unsplash.com/photo-1497316730643-415fac54a2af?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGFraW5nJTIwcGhvdG98ZW58MHx8MHx8fDA%3D" alt="..." />
+                                <img className="your_img" src={profile?.avatarUrl} alt="avatar" />
                             </div>
                             <div className="your_info">
-                                    <h1 className="your_info_text_1">test</h1>
-                                    <h1 className="your_info_text_2">test</h1>
+                                    <h1 className="your_info_text_1">{profile?.firstName} {profile?.lastName}</h1> 
+                                    <h1 className="your_info_text_2">{profile?.position} / {profile?.company}</h1>
                                 </div>
                             
                         </div>

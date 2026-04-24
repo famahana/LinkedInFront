@@ -1,13 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState,useEffect, type ReactNode } from "react";
 import type { UserDto } from "../types/user";
 import Cookies from "js-cookie"
+import type { ProfileDto } from "../types/Profile";
+import { profileService } from "../services/profileService";
 
 interface AuthContextType
 {
     token: string | null;
     user: UserDto | null;
+    profile:ProfileDto | null;
     login: (token: string, user: UserDto) => void;
     logout: () => void;
+    setProfile:(profile:ProfileDto | null)=> void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -32,6 +36,25 @@ export function AuthProvider({ children }: { children: ReactNode })
             return null;
         }
     });
+    const [profile, setProfile] = useState<ProfileDto | null>(null);
+    useEffect(() =>
+    {
+       const loadProfile = async ()=>
+       {
+        if(!token) return
+        try
+        {
+            const data = await profileService.getMyProfile();
+            setProfile(data)
+        }
+        catch
+        {
+            setProfile(null)
+        }
+        
+       };
+       loadProfile()
+    }, [token]);
 
     const login = (token: string, user: UserDto) =>
     {
@@ -56,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode })
     };
 
     return (
-        <AuthContext.Provider value={{ token, user, login, logout }}>
+        <AuthContext.Provider value={{ token, user,profile, login, logout,setProfile }}>
             {children}
         </AuthContext.Provider>
     );

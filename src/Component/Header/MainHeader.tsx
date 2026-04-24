@@ -1,8 +1,11 @@
 import "../../Styles/Style.css"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../AuthContext";
 
 export default function MainHeader()
 {
+    const {profile} = useAuth();
+    const {logout} = useAuth();
     const navigate = useNavigate();
         const handleLinkedInButton = async () =>
         {
@@ -100,9 +103,10 @@ export default function MainHeader()
                         </div>
                     </div>
                     <div className="container_profile">
-                        <img src="" alt="..." />
+                        <img className="avatar_header" src={profile?.avatarUrl} alt="" />
                         <h1 onClick={handleMyProfileButton} className="text_main">My Profile</h1>
-                    </div>      
+                    </div>
+                     <button onClick={logout}></button>      
                  </div>
             </div>        
         </header>

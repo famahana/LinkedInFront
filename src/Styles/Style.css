@@ -716,6 +716,7 @@ color: #FFFFFF;
 background-color: transparent;
 border: 0;
 cursor: pointer;
+width: 100%;
 }
 .button_container
 {
@@ -797,6 +798,7 @@ line-height: 150%;
 color: #2D3436;
 background-color: transparent;
 border: 0;
+width: 100%;
 }
 
 @media (max-height: 1080px) {
@@ -854,7 +856,6 @@ cursor: pointer;
 .container_main
 {
 display: flex;
-flex-direction: row;
 align-items: center;
 padding: 0px;
 gap: 128px;
@@ -866,6 +867,7 @@ flex-direction: row;
 align-items: center;
 padding: 0px;
 gap: 48px;
+width: 100%;
 }
 .search_input_container
 {
@@ -874,10 +876,10 @@ flex-direction: row;
 align-items: center;
 padding: 10px;
 gap: 10px;
+max-width: 500px;
+max-height: 50px;
 background: #FFFFFF;
 border-radius: 8px;
-max-width: 500px;
-max-height: 40px;
 }
 .search_input
 {
@@ -887,6 +889,7 @@ font-weight: 400;
 font-size: 16px;
 line-height: 24px;
 color: #6C5CE7;
+width: 100%;
 border: 0;
 }
 .buttons_container_header
@@ -949,10 +952,8 @@ cursor: pointer;
 }
 .container_profile
 {
-width: 100px;
-height: 40px;
 display: flex;
-flex-direction: row;
+flex-direction: column;
 justify-content: center;
 align-items: flex-end;
 padding: 10px;
@@ -1097,4 +1098,17 @@ border-radius: 64px;
 }
 .input_error {
     border: 1px solid #ff7675 !important;
+}
+.error-text
+{
+color: #ff7675;
+margin-top: 10px;
+text-align: start;
+font-size: 14px;
+}
+.avatar_header
+{
+width: 80px;
+height: 80px;
+border-radius: 64px;
 }
