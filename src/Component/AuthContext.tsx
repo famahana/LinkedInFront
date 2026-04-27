@@ -18,16 +18,9 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode })
 {
-    // const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
     const [token, setToken] = useState<string | null>(() => {
         return Cookies.get("token") || null;
     });
-
-    // const [user, setUser] = useState<UserDto | null>(() =>
-    // {
-    //     const savedUser = localStorage.getItem("user");
-    //     return savedUser ? JSON.parse(savedUser) : null;
-    // });
     const [user, setUser] = useState<UserDto | null>(() => {
         const savedUser = Cookies.get("user");
         try {
@@ -39,17 +32,26 @@ export function AuthProvider({ children }: { children: ReactNode })
     const [profile, setProfile] = useState<ProfileDto | null>(null);
     useEffect(() =>
     {
+        if(!token) return
        const loadProfile = async ()=>
        {
-        if(!token) return
         try
         {
             const data = await profileService.getMyProfile();
             setProfile(data)
         }
-        catch
+        catch(error:any)
         {
-            setProfile(null)
+            if(error.status === 401)
+            {
+                logout();
+            }
+            else
+            {
+                console.warn("Profile not found on server error",error.message)
+                setProfile(null)
+            }
+
         }
         
        };
@@ -58,8 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode })
 
     const login = (token: string, user: UserDto) =>
     {
-        // localStorage.setItem("token", token);
-        // localStorage.setItem("user", JSON.stringify(user));
+       
         Cookies.set("token", token, { expires: 7, secure: true, sameSite: 'strict' });
         Cookies.set("user", JSON.stringify(user), { expires: 7, secure: true, sameSite: 'strict' });
 
@@ -69,8 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode })
 
     const logout = () =>
     {
-        // localStorage.removeItem("token");
-        // localStorage.removeItem("user");
+        
         Cookies.remove("token");
         Cookies.remove("user");
 

@@ -8,7 +8,7 @@ function UserPage()
                     <div className="your_profile_container">
                         <div className="your_profile">
                             <div className="your_immage">
-                                <img className="your_img" src={profile?.avatarUrl} alt="avatar" />
+                                <img className="your_img" src={profile?.avatarUrl} alt="" />
                             </div>
                             <div className="your_info">
                                     <h1 className="your_info_text_1">{profile?.firstName} {profile?.lastName}</h1> 
@@ -22,7 +22,6 @@ function UserPage()
                                     <h1 className="expand_text">Expand your network of contacts</h1>
                                 </div>
                             </div>
-
                     </div>
                     <div className="saved_elements_container">
                         <div className="saved_elements">

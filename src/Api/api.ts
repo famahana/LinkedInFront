@@ -26,10 +26,18 @@ export async function request<T>(
     {
         data = null;
     }
+    if(response.status ===401)
+    {
+        Cookies.remove("token");
+        Cookies.remove("user");
+        throw new Error("Session expired");
+    }
 
     if (!response.ok)
     {
-        throw new Error(data?.message || "Request failed");
+        const error:any = new Error(data?.message || "Request failed");
+        error.status = response.status;
+        throw error;
     }
 
     return data;
