@@ -13,6 +13,8 @@ import LoginVerificationLayout from "../Layouts/LoginVerificationLayout";
 import UserPageLayout from "../Layouts/UserPageLayout";
 import UserPage from "../Component/UserPage";
 import { PrivateRoute } from "../Component/PrivateRoute";
+import ProfilePageMy from "../Component/ProfilePageMy";
+import ProfilePageMyLayout from "../Layouts/ProfilePageMyLayout";
 
 export const router = createBrowserRouter([
     {
@@ -76,6 +78,21 @@ export const router = createBrowserRouter([
                 )
             }
         ]
+    },
+    {
+        element:<ProfilePageMyLayout/>,
+        children:[
+            {
+                path:"/profilepagemy",
+                element:
+                (
+                    <PrivateRoute>
+                        <ProfilePageMy/>
+                    </PrivateRoute>
+                )
+            }
+        ]
+
     }
     
 ])

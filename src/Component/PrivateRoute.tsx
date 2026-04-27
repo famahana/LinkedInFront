@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 type Props = {
     children: React.ReactNode;
@@ -6,7 +7,7 @@ type Props = {
 
 export function PrivateRoute({ children }: Props)
 {
-    const token = localStorage.getItem("token");
+    const {token} = useAuth();
 
     if (!token)
     {

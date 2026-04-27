@@ -2,11 +2,14 @@ import { useState } from "react"
 import { authService } from "../services/authService"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 function LoginForm()
 {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
     const navigate = useNavigate();
+    const {login} = useAuth();
     const handleLinkedInButton = async () =>
     {
         navigate("/"); 
@@ -19,16 +22,17 @@ function LoginForm()
     {
         try
         {
-            const data = await authService.login({ email, password });
+            setError("");
+            const result = await authService.login({email,password});
+            login(result.accessToken,result.user)
 
-            localStorage.setItem("token", data.accessToken);
 
             console.log("Sucefull login");
             navigate("/userpage");
         }
-        catch (error)
+        catch (error: any)
         {
-            console.error("Error login", error);
+            setError(error.message);
         }
     };
     return(
@@ -94,6 +98,7 @@ function LoginForm()
                             <div className="sign_up_button_container">
                                 <button onClick={handleLogin} className="sign_up_button">Sign Up</button>
                             </div>
+                            {error && <p className="error-text">{error}</p>}
                                 <h1 className="signup_text">Forgot your password? <Link to="/" className="privacy_text">Reset password</Link></h1>
                             </div>
                         </div>
@@ -120,9 +125,9 @@ function LoginForm()
                         </div>
                         <div className="sign_in_container_continue">
                             <div className="continue_google_container">
-                                <div className="sign_in_container_reg">
+                                
                                     <button onClick={handleSignUpButton} className="signin_button">Sign up</button>
-                                </div>
+                                
                        </div>
                         </div>
                     </div>
