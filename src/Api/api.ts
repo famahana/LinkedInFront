@@ -8,10 +8,12 @@ export async function request<T>(
 {
     const token = Cookies.get("token");
 
-    const response = await fetch(`${API_URL}${url}`, {
+   const response = await fetch(`${API_URL}${url}`, {
         ...options,
         headers: {
-            "Content-Type": "application/json",
+            ...(options.body instanceof FormData
+                ? {}
+                : { "Content-Type": "application/json" }),
             ...(token && { Authorization: `Bearer ${token}` }),
             ...options.headers
         }
@@ -35,9 +37,13 @@ export async function request<T>(
 
     if (!response.ok)
     {
-        const error:any = new Error(data?.message || "Request failed");
-        error.status = response.status;
-        throw error;
+        throw{
+            status:response.status,
+            message:data?.message || "Request failed"
+        }
+        
+        
+        
     }
 
     return data;
