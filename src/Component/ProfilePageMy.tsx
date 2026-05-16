@@ -1,7 +1,7 @@
-import React, { useRef,useState,useEffect, type ChangeEvent } from "react"
-import { useAuth } from "./AuthContext"
+import  { useRef,useState,useEffect, type ChangeEvent } from "react"
+import { useAuth } from "../AuthContext/AuthContext"
 import { profileService } from "../services/profileService"
-import { type UpdateProfileDto, type ProfileDto } from "../types/Profile"
+import { type UpdateProfileDto,  } from "../types/Profile"
 
 function ProfilePageMy()
 {
@@ -37,20 +37,6 @@ function ProfilePageMy()
             alert("failed to update profile")
         }
     };
-    const hanleAvatarUpload = async (e:ChangeEvent<HTMLInputElement>)=>
-    {
-        const file = e.target.files?.[0];
-        if(!file) return
-        try
-        {
-            const updatedProfile = await profileService.uploadAvatar(file);
-            setProfile(updatedProfile);
-        }
-        catch(error)
-        {
-            console.error(error);
-        }
-    }
     const handleBannerUpload = async (e:ChangeEvent<HTMLInputElement>)=>
     {
         const file = e.target.files?.[0];

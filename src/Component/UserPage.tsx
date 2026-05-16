@@ -1,15 +1,25 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../AuthContext/AuthContext";
 import { postService } from "../services/postService";
 import { type PostDto } from "../types/post";
 function UserPage()
 {
     const {profile} = useAuth()
     const [content,setContent] = useState("");
+    const isInvalid = !content || content.trim() === "";
     const handleCreate = async () => {
-        const newPost = await postService.createPost(content);
-        setPosts(prev => [newPost,...prev]);
-        setContent("")
+        if(isInvalid) return;
+        try 
+        {
+            const newPost = await postService.createPost(content);
+            setPosts(prev => [newPost,...prev]);
+            setContent("")
+        }
+        catch(error)
+        {
+            console.error("Error creating post:", error);
+        }
+
     }
     const [posts,setPosts] = useState<PostDto[]>([]);
     useEffect(()=>{
@@ -52,7 +62,7 @@ function UserPage()
                             <img className="avatar_post" src={profile?.avatarUrl} alt="" />
                             <div className="text_post_container">
                                 <input value={content} onChange={(e) => setContent(e.target.value)} className="create_post_text" placeholder="Start your post" type="text" />
-                                <button onClick={handleCreate}>Post</button>
+                                <button className="create_post_btn" disabled={isInvalid} style={{opacity: isInvalid ? 0.5 : 1, cursor: isInvalid ? 'not-allowed' : 'pointer'}} onClick={handleCreate}>Post</button>
                             </div>
                         </div>
                         <div className="line"></div>
