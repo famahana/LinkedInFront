@@ -7,9 +7,10 @@ import { profileService } from "../services/profileService";
 interface AuthContextType
 {
     token: string | null;
+    refreshToken?: string | null;
     user: UserDto | null;
     profile:ProfileDto | null;
-    login: (token: string, user: UserDto) => void;
+    login: (token: string, refreshToken: string, user: UserDto) => void;
     logout: () => void;
     setProfile:(profile:ProfileDto | null)=> void;
 }
@@ -18,9 +19,8 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode })
 {
-    const [token, setToken] = useState<string | null>(() => {
-        return Cookies.get("token") || null;
-    });
+    const [token, setToken] = useState<string | null>(() => Cookies.get("token") || null);
+    const [refreshToken, setRefreshToken] = useState<string | null>(() => Cookies.get("refreshToken") || null);
     const [user, setUser] = useState<UserDto | null>(() => {
         const savedUser = Cookies.get("user");
         try {
@@ -32,7 +32,11 @@ export function AuthProvider({ children }: { children: ReactNode })
     const [profile, setProfile] = useState<ProfileDto | null>(null);
     useEffect(() =>
     {
-        if(!token) return
+        if(!token)
+        {
+            setProfile(null);
+            return;
+        }
        const loadProfile = async ()=>
        {
         try
@@ -42,29 +46,22 @@ export function AuthProvider({ children }: { children: ReactNode })
         }
         catch(error:any)
         {
-            if(error.status === 401)
-            {
-                logout();
-            }
-            else
-            {
-                console.warn("Profile not found on server error",error.message)
-                setProfile(null)
-            }
-
+            
+                console.warn("Failed to load profile",error.message)
         }
-        
        };
        loadProfile()
     }, [token]);
 
-    const login = (token: string, user: UserDto) =>
+    const login = (token: string, refreshToken: string,user: UserDto) =>
     {
        
         Cookies.set("token", token, { expires: 7, secure: true, sameSite: 'strict' });
+        Cookies.set("refreshToken", refreshToken, { expires: 7, secure: true, sameSite: 'strict' });
         Cookies.set("user", JSON.stringify(user), { expires: 7, secure: true, sameSite: 'strict' });
 
         setToken(token);
+        setRefreshToken(refreshToken);
         setUser(user);
     };
 
@@ -72,14 +69,16 @@ export function AuthProvider({ children }: { children: ReactNode })
     {
         
         Cookies.remove("token");
+        Cookies.remove("refreshToken");
         Cookies.remove("user");
 
         setToken(null);
+        setRefreshToken(null);
         setUser(null);
     };
 
     return (
-        <AuthContext.Provider value={{ token, user,profile, login, logout,setProfile }}>
+        <AuthContext.Provider value={{ token, refreshToken, user, profile, login, logout, setProfile }}>
             {children}
         </AuthContext.Provider>
     );

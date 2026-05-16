@@ -2,7 +2,7 @@ import { useState } from "react"
 import { authService } from "../services/authService"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../AuthContext/AuthContext";
 function LoginForm()
 {
     const [email, setEmail] = useState<string>("");
@@ -24,7 +24,7 @@ function LoginForm()
         {
             setError("");
             const result = await authService.login({email,password});
-            login(result.accessToken,result.user)
+            login(result.accessToken,result.refreshToken,result.user)
 
 
             console.log("Sucefull login");
