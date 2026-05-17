@@ -48,6 +48,7 @@ export async function request<T>(url: string, options: RequestInit = {}): Promis
             } catch {
                 Cookies.remove("token");
                 Cookies.remove("refreshToken");
+                Cookies.remove("isEmailVerified")
                 Cookies.remove("user");
                 window.location.href = "/login";
                 throw new Error("Session expired");
@@ -61,8 +62,14 @@ export async function request<T>(url: string, options: RequestInit = {}): Promis
     } catch {
         data = null;
     }
+    
 
     if (!response.ok) {
+        if (response.status === 403) {
+            alert("This action requires email verification!");
+            window.location.href = "/regverification"; 
+            throw { status: 403, message: "Email not verified" };
+        }
         throw {
             status: response.status,
             message: data?.message || "Request failed"

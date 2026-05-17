@@ -61,7 +61,7 @@ function RegistrationForm()
         try {
             await authService.register({ email, password });
             console.log("Success!");
-            navigate("/login"); 
+            navigate("/regverification", {state:{email}}); 
         } catch (error) {
             console.error("Registration error:", error);
             alert("Registration failed. Check your data.");
