@@ -24,7 +24,7 @@ function LoginForm()
         {
             setError("");
             const result = await authService.login({email,password});
-            login(result.accessToken,result.refreshToken,result.user)
+            login(result.accessToken,result.isEmailVerified,result.refreshToken,result.user,)
 
 
             console.log("Sucefull login");
