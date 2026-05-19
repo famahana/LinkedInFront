@@ -10,8 +10,10 @@ function RegistrationVerification()
     {
         navigate("/"); 
     }
+
     const { user } = useAuth();
-    const email = user?.email || "";
+    const location = useLocation()
+    const email = user?.email|| location.state?.email || "";
     const { setIsEmailVerified } = useAuth();
     const navigate = useNavigate();
     const [codeDigits, setCodeDigits] = useState<string[]>(new Array(6).fill(""));
@@ -39,6 +41,11 @@ function RegistrationVerification()
     const handleVerifySubmit = async () => {
     const fullCode = codeDigits.join("");
     if (fullCode.length < 6) return;
+    if(!email)
+    {
+        setError("Email context is missing. Please log in or register again.")
+        return
+    }
 
     setLoading(true);
     setError("");
