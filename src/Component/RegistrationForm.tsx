@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useState,useEffect } from "react"
 import { authService } from "../services/authService"
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 function RegistrationForm()
 {
     const [email, setEmail] = useState<string>("");
@@ -59,7 +60,15 @@ function RegistrationForm()
         }
 
         try {
-            await authService.register({ email, password });
+            const response = await authService.register({email,password})
+            if (response && response.accessToken)
+            {
+                Cookies.set("token", response.accessToken, { expires: 7, secure: true, sameSite: 'strict' });
+                Cookies.set("refreshToken", response.refreshToken, { expires: 7, secure: true, sameSite: 'strict' });
+                Cookies.set("user", JSON.stringify(response.user), { expires: 7, secure: true, sameSite: 'strict' });
+            }
+
+            // await authService.register({ email, password });
             console.log("Success!");
             navigate("/regverification", {state:{email}}); 
         } catch (error) {
